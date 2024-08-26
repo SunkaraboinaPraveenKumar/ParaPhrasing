@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Paraphrase Generator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body{
+        background:black;
+        color:white;
+    }
+    .list-group-item{
+        background:white;
+        color:black;
+    }
+</style>
+<body>
+    <h1 class="text-center mt-4">
+        Paraphrase Generator
+    </h1>
+    <div class="container mt-5" style="padding:50px; width:50%; border:3px red dashed; border-radius:15px;">
+        <h5 class="text-center mb-4">
+            Using Google PEGASUS Transformer
+        </h5>
+        <form action="/paraphrase" method="post">
+            <div class="form-group">
+                <label for="text">
+                    Enter Text
+                </label>
+                <textarea  class="form-control" id="text" name="text" rows="4" cols="50"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="num_paraphrases">
+                    Select Number of ParaPhrases
+                </label>
+                <select class="form-control" id="num_paraphrases" name="num_paraphrases">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="12">12</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">ParaPhrase</button>
+        </form>
+
+        {% if paraphrases %}
+        <h3>Original Text</h3>
+        <p>{{input_text}}</p>
+
+        <hr>
+        <h2>Generated ParaPhrases:</h2>
+        <ul class="list-group">
+            {% for paraphrase in paraphrases %}
+            <li class="list-group-item">{{paraphrase}}</li>
+            {% endfor %}
+        </ul>
+
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
